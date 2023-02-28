@@ -14,14 +14,23 @@
 #define CONTACT_HPP
 
 #include <iostream>
-#include <cstring>
+#include <string>
+#include <iomanip>
+#include <cstdio>
+#include <limits>
 
 class Contact
 {
 	public:
-		void	add_details();
+		int			add_details();
+		void		get_input(std::string input);
+		std::string	get_first_name();
+		std::string	get_last_name();
+		std::string	get_nickname();
+		std::string	get_phone_number();
+		std::string	get_darkest_secret();
 
-	// private:
+	private:
 		std::string	first_name;
 		std::string	last_name;
 		std::string	nickname;

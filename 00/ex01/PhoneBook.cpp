@@ -18,13 +18,13 @@ void	PhoneBook::add_contact()
 	static int	i;
 	std::string yesno;
 
-	if (i == 1)
+	if (i == MAX_CONTACTS)
 	{
 		while (1)
 		{
 			std::cout << "Adding new contacts will replace your oldest contact." << std::endl;
-			std::cout << "Please type YES / NO." << std::endl;
-			std::cin >> yesno;
+			std::cout << "Enter (YES / NO): ";
+			std::getline(std::cin, yesno);
 			if (yesno == "YES")
 			{
 				i = 0;
@@ -33,33 +33,69 @@ void	PhoneBook::add_contact()
 			else if (yesno == "NO")
 				return ;
 			else
-				std::cout << "Error." << std::endl;
+				std::cout << "Error: input must be YES or NO in uppercase." << std::endl;
 		}
 	}
-	tmp.add_details();
+	while (1)
+	{
+		if (tmp.add_details())
+			std::cout << "Error: details cannot be empty." << std::endl;
+		else
+			break ;
+	}
 	this->contact[i] = tmp;
 	i++;
 }
 
 void	PhoneBook::display_contacts()
 {
+	Contact	tmp;
+
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
-	for (int i = 0; i < MAX_CONTACTS; i++)
+	for (int i = 0; i < MAX_CONTACTS; i++) // for loop display list of 8 contacts
 	{
+		tmp = this->contact[i];
 		std::cout << "|"
 		<< std::setw(10) << i + 1 << "|"
-		<< std::setw(10) << this->contact[i].first_name << "|"
-		<< std::setw(10) << this->contact[i].last_name << "|"
-		<< std::setw(10) << this->contact[i].nickname << "|"
+		<< std::setw(10) << append_string(tmp.get_first_name()) << "|"
+		<< std::setw(10) << append_string(tmp.get_last_name()) << "|"
+		<< std::setw(10) << append_string(tmp.get_nickname()) << "|"
 		<< std::endl;
 	}
+	while (1)
+	{
+		int	index;
+		std::cout << "Enter an index (1 - 8): ";
+		std::cin >> index;
+		if (std::cin.fail()) // input was not an integer
+		{
+			std::cin.clear(); // clear the fail flag
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+			std::cout << "Error: input must be an integer." << std::endl;
+		}
+		else if (index >= 1 && index <= 8) // prints out details of a contact selected
+		{
+			tmp = this->contact[index - 1];
+			std::cout << "First Name: " << tmp.get_first_name() << std::endl;
+			std::cout << "Last Name: " << tmp.get_last_name() << std::endl;
+			std::cout << "Nickname: " << tmp.get_nickname() << std::endl;
+			std::cout << "Phone Number: " << tmp.get_phone_number() << std::endl;
+			std::cout << "Darkest Secret: " << tmp.get_darkest_secret() << std::endl;
+			break ;
+		}
+		else
+			std::cout << "Error: input must be between 1 and 8." << std::endl;
+	}
+	while (std::cin.get() != '\n')
+		continue;
+}
 
-	// for (int i = 0; i < 8; i++)
-	// {
-	// 	std::cout << "First Name: " << this->contact[i].first_name << std::endl;
-	// 	std::cout << "Last Name: " << this->contact[i].last_name << std::endl;
-	// 	std::cout << "Nickname: " << this->contact[i].nickname << std::endl;
-	// 	std::cout << "Phone Number: " << this->contact[i].phone_number << std::endl;
-	// 	std::cout << "Darkest Secret: " << this->contact[i].darkest_secret << std::endl;
-	// }
+std::string	PhoneBook::append_string(std::string str)
+{
+	if (str.length() > 10) // checks if length of str is more than 10
+	{
+		str.resize(9); // resize to first 9 characters in the string
+		str.append("."); // append by adding a character at the end of the string
+	}
+	return (str);
 }

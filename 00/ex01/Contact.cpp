@@ -12,16 +12,52 @@
 
 #include "Contact.hpp"
 
-void	Contact::add_details()
+int	Contact::add_details()
 {
-	std::cout << "Please enter your First Name:" << std::endl;
-	std::cin >> this->first_name;
-	std::cout << "Please enter your Last Name:" << std::endl;
-	std::cin >> this->last_name;
-	std::cout << "Please enter your Nickname:" << std::endl;
-	std::cin >> this->nickname;
-	std::cout << "Please enter your Phone Number:" << std::endl;
-	std::cin >> this->phone_number;
-	std::cout << "Please enter your Darkest Secret:" << std::endl;
-	std::cin >> this->darkest_secret;
+	std::cout << "Enter your First Name: ";
+	std::getline(std::cin, this->first_name);
+	if (this->first_name == "")
+		return (1);
+	std::cout << "Enter your Last Name: ";
+	std::getline(std::cin, this->last_name);
+	if (this->last_name == "")
+		return (1);
+	std::cout << "Enter your Nickname: ";
+	std::getline(std::cin, this->nickname);
+	if (this->nickname == "")
+		return (1);
+	std::cout << "Enter your Phone Number: ";
+	std::getline(std::cin, this->phone_number);
+	if (this->phone_number == "")
+		return (1);
+	std::cout << "Enter your Darkest Secret: ";
+	std::getline(std::cin, this->darkest_secret);
+	if (this->darkest_secret == "")
+		return (1);
+	return (0);
+}
+
+std::string	Contact::get_first_name()
+{
+	return(this->first_name);
+}
+
+std::string	Contact::get_last_name()
+{
+	return(this->last_name);
+}
+
+std::string	Contact::get_nickname()
+{
+	return(this->nickname);
+}
+
+std::string	Contact::get_phone_number()
+{
+	return(this->phone_number);
+}
+
+std::string	Contact::get_darkest_secret()
+{
+	return(this->darkest_secret);
 }

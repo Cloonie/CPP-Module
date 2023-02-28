@@ -14,8 +14,11 @@
 #define PHONEBOOK_HPP
 
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <iomanip>
+#include <cstdio>
+#include <limits>
+
 #include "Contact.hpp"
 
 #define MAX_CONTACTS 8
@@ -23,8 +26,9 @@
 class PhoneBook
 {
 	public:
-		void	add_contact();
-		void	display_contacts();
+		void		add_contact();
+		void		display_contacts();
+		std::string	append_string(std::string str);
 	private:
 		Contact		contact[MAX_CONTACTS];
 };

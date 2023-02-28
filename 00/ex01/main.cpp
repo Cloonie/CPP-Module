@@ -14,20 +14,22 @@
 
 int	main(void)
 {
-	PhoneBook object;
+	PhoneBook 	object;
 	std::string cmd;
+
+	std::cout	<< "~ PHONEBOOK from CPP00 EX01 ~\n"
+				<< "ADD: saves a new contact.\n"
+				<< "SEARCH: display a specific contact.\n"
+				<< "EXIT: program quits and the contacts are lost forever!.\n";
 	while (1)
 	{
-		std::cout	<< "Enter a command:\n"
-					<< "ADD: adds a new contact.\n"
-					<< "SEARCH: search for a contact in a list.\n"
-					<< "EXIT: exit program.\n";
-		std::cin >> cmd;
+		std::cout << "Enter a command: ";
+		std::getline(std::cin, cmd);
 		if (cmd == "ADD")
 			object.add_contact();
-		else if (cmd == "SEARCH")
+		if (cmd == "SEARCH")
 			object.display_contacts();
-		else if (cmd == "EXIT")
+		if (cmd == "EXIT")
 			break ;
 	}
 	return 0;
