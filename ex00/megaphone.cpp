@@ -20,10 +20,10 @@ int	main(int ac, char **av)
 		for (int j = 1; j < ac; j++)
 		{
 			for (size_t i = 0; i < strlen(av[j]); i++)
-				putwchar(toupper(av[j][i]));
-			putwchar(' ');
+				std::cout << (char)toupper(av[j][i]);
+			std::cout << " ";
 		}
-		putwchar('\n');
+		std::cout << std::endl;
 	}
 	else
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
